@@ -1,6 +1,11 @@
 'use strict';
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var pikeUl = document.getElementById('pike');
+var seaTacUl = document.getElementById('seatac');
+var seaCenterUl = document.getElementById('seacenter');
+var capHillUl =  document.getElementById('caphill');
+var alkiUl = document.getElementById('alki');
 
 function getRandomIntInclusive(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,7 +39,17 @@ var firstAndPine = {
         }
 
         return[this.salesPerHour.push];
+    },
+
+    render: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            var liEl = document.createElement('li');
+            liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
+            pikeUl.appendChild(liEl);
+        }
     }
+
 };
 
 var seaTac = {
@@ -65,6 +80,15 @@ var seaTac = {
         }
 
         return[this.salesPerHour.push];
+    },
+
+    render: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            var liEl = document.createElement('li');
+            liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
+            seaTacUl.appendChild(liEl);
+        }
     }
 
 };
@@ -97,6 +121,15 @@ var seaCenter = {
         }
 
         return[this.salesPerHour.push];
+    },
+    
+    render: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            var liEl = document.createElement('li');
+            liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
+            seaCenterUl.appendChild(liEl);
+        }
     }
 
 };
@@ -129,6 +162,15 @@ var capHill = {
         }
 
         return[this.salesPerHour.push];
+    },
+
+    render: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            var liEl = document.createElement('li');
+            liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
+            capHillUl.appendChild(liEl);
+        }
     }
 
 };
@@ -162,16 +204,29 @@ var alki = {
 
         return[this.salesPerHour.push];
     },
+
+    render: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            var liEl = document.createElement('li');
+            liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
+            alkiUl.appendChild(liEl);
+        }
+    }
 };
 
 firstAndPine.footTraffic();
 firstAndPine.multiply();
+firstAndPine.render();
 seaTac.footTraffic();
 seaTac.multiply();
+seaTac.render();
 seaCenter.footTraffic();
 seaCenter.multiply();
+seaCenter.render();
 capHill.footTraffic();
 capHill.multiply();
+capHill.render();
 alki.footTraffic();
 alki.multiply();
 alki.render();
