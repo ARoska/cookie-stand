@@ -11,13 +11,14 @@ function getRandomIntInclusive(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var firstAndPine = {
-    name: '1st and Pine',
+var firstAndPike = {
+    name: '1st and Pike',
     minCust: 23,
     maxCust: 65,
     avgPerCust: 6.3,
     custPerHour: [],
     salesPerHour: [],
+    totalCookies: 0,
 
     // Generates an estimated average number of customers per hour
     footTraffic: function () {
@@ -27,7 +28,7 @@ var firstAndPine = {
             this.custPerHour[i] = getRandomIntInclusive(this.minCust, this.maxCust);
         }
         // Thanks to Tanner for suggesting .push
-        return[this.custPerHour.push]; 
+        return[this.custPerHour.push];
     },
 
     // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
@@ -37,9 +38,16 @@ var firstAndPine = {
             this.salesPerHour[i] = this.custPerHour[i] * this.avgPerCust;
             this.salesPerHour[i] = Math.ceil(this.salesPerHour[i]);
         }
-
         return[this.salesPerHour.push];
     },
+
+        total: function() {
+            var i;
+            for (i = 0; i < this.custPerHour.length; i++) {
+                this.totalCookies = this.totalCookies + this.salesPerHour[i];
+            }
+            return[this.totalCookies];
+        },
 
     render: function() {
         var i;
@@ -48,6 +56,9 @@ var firstAndPine = {
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             pikeUl.appendChild(liEl);
         }
+        var liEl = document.createElement('li');
+        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        pikeUl.appendChild(liEl);
     }
 
 };
@@ -59,6 +70,7 @@ var seaTac = {
     avgPerCust: 1.2,
     custPerHour: [],
     salesPerHour: [],
+    totalCookies: 0,
 
     // Generates an estimated average number of customers per hour
     footTraffic: function () {
@@ -82,6 +94,14 @@ var seaTac = {
         return[this.salesPerHour.push];
     },
 
+    total: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+        }
+        return[this.totalCookies];
+    },
+
     render: function() {
         var i;
         for (i = 0; i < this.custPerHour.length; i++) {
@@ -89,6 +109,9 @@ var seaTac = {
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             seaTacUl.appendChild(liEl);
         }
+        var liEl = document.createElement('li');
+        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        seaTacUl.appendChild(liEl);
     }
 
 };
@@ -100,6 +123,7 @@ var seaCenter = {
     avgPerCust: 3.7,
     custPerHour: [],
     salesPerHour: [],
+    totalCookies: 0,
 
     // Generates an estimated average number of customers per hour
     footTraffic: function () {
@@ -122,7 +146,15 @@ var seaCenter = {
 
         return[this.salesPerHour.push];
     },
-    
+
+    total: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+        }
+        return[this.totalCookies];
+    },
+
     render: function() {
         var i;
         for (i = 0; i < this.custPerHour.length; i++) {
@@ -130,6 +162,9 @@ var seaCenter = {
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             seaCenterUl.appendChild(liEl);
         }
+        var liEl = document.createElement('li');
+        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        seaCenterUl.appendChild(liEl);
     }
 
 };
@@ -141,7 +176,8 @@ var capHill = {
     avgPerCust: 2.8,
     custPerHour: [],
     salesPerHour: [],
-
+    totalCookies: 0,
+    
     // Generates an estimated average number of customers per hour
     footTraffic: function () {
         var i;
@@ -164,13 +200,24 @@ var capHill = {
         return[this.salesPerHour.push];
     },
 
-    render: function() {
+    total: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+        }
+        return[this.totalCookies];
+    },
+
+render: function() {
         var i;
         for (i = 0; i < this.custPerHour.length; i++) {
             var liEl = document.createElement('li');
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             capHillUl.appendChild(liEl);
         }
+        var liEl = document.createElement('li');
+        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        capHillUl.appendChild(liEl);
     }
 
 };
@@ -182,6 +229,7 @@ var alki = {
     avgPerCust: 4.6,
     custPerHour: [],
     salesPerHour: [],
+    totalCookies: 0,
 
     // Generates an estimated average number of customers per hour
     footTraffic: function () {
@@ -205,6 +253,14 @@ var alki = {
         return[this.salesPerHour.push];
     },
 
+    total: function() {
+        var i;
+        for (i = 0; i < this.custPerHour.length; i++) {
+            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+        }
+        return[this.totalCookies];
+    },
+
     render: function() {
         var i;
         for (i = 0; i < this.custPerHour.length; i++) {
@@ -212,21 +268,33 @@ var alki = {
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             alkiUl.appendChild(liEl);
         }
+        var liEl = document.createElement('li');
+        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        alkiUl.appendChild(liEl);
     }
 };
 
-firstAndPine.footTraffic();
-firstAndPine.multiply();
-firstAndPine.render();
+firstAndPike.footTraffic();
+firstAndPike.multiply();
+firstAndPike.total();
+firstAndPike.render();
+
 seaTac.footTraffic();
 seaTac.multiply();
+seaTac.total();
 seaTac.render();
+
 seaCenter.footTraffic();
 seaCenter.multiply();
+seaCenter.total();
 seaCenter.render();
+
 capHill.footTraffic();
 capHill.multiply();
+capHill.total();
 capHill.render();
+
 alki.footTraffic();
 alki.multiply();
+alki.total();
 alki.render();
