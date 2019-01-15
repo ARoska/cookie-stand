@@ -7,294 +7,301 @@ var seaCenterUl = document.getElementById('seacenter');
 var capHillUl =  document.getElementById('caphill');
 var alkiUl = document.getElementById('alki');
 
-function getRandomIntInclusive(max, min) {
+function randomCustomers(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 var firstAndPike = {
     name: '1st and Pike',
-    minCust: 23,
-    maxCust: 65,
-    avgPerCust: 6.3,
-    custPerHour: [],
+    minCustomersPerHour: 23,
+    maxCustomersPerHour: 65,
+    avgCookiesPerCustomer: 6.3,
+    customersPerHour: [],
     salesPerHour: [],
-    totalCookies: 0,
+    totalDailyCookies: 0,
 
-    // Generates an estimated average number of customers per hour
-    footTraffic: function () {
+    // Generates an estimated average number of customers per hour.
+    calcCustomersPerHour: function () {
         var i;
 
         for (i = 0; i < hours.length; i++) {
-            this.custPerHour[i] = getRandomIntInclusive(this.minCust, this.maxCust);
+            this.customersPerHour[i] = randomCustomers(this.minCustomersPerHour, this.maxCustomersPerHour);
         }
         // Thanks to Tanner for suggesting .push
-        return[this.custPerHour.push];
+        return[this.customersPerHour.push];
     },
 
     // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
-    multiply: function() {
+    calcSalesPerHour: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.salesPerHour[i] = this.custPerHour[i] * this.avgPerCust;
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.salesPerHour[i] = this.customersPerHour[i] * this.avgCookiesPerCustomer;
             this.salesPerHour[i] = Math.ceil(this.salesPerHour[i]);
         }
         return[this.salesPerHour.push];
     },
 
-        total: function() {
-            var i;
-            for (i = 0; i < this.custPerHour.length; i++) {
-                this.totalCookies = this.totalCookies + this.salesPerHour[i];
-            }
-            return[this.totalCookies];
-        },
+    // Adds each hour's cookie sales to find the total amount of cookies sold per day.
+    calcTotalDailyCookies: function() {
+        var i;
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.totalDailyCookies = this.totalDailyCookies + this.salesPerHour[i];
+        }
+        return[this.totalDailyCookies];
+    },
 
     render: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
             var liEl = document.createElement('li');
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             pikeUl.appendChild(liEl);
         }
         var liEl = document.createElement('li');
-        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        liEl.textContent = `Total: ${this.totalDailyCookies} cookies`;
         pikeUl.appendChild(liEl);
     }
-
 };
 
 var seaTac = {
     name: 'SeaTac Airport',
-    minCust: 3,
-    maxCust: 24,
-    avgPerCust: 1.2,
-    custPerHour: [],
+    minCustomersPerHour: 3,
+    maxCustomersPerHour: 24,
+    avgCookiesPerCustomer: 1.2,
+    customersPerHour: [],
     salesPerHour: [],
-    totalCookies: 0,
+    totalDailyCookies: 0,
 
     // Generates an estimated average number of customers per hour
-    footTraffic: function () {
+    calcCustomersPerHour: function () {
         var i;
 
         for (i = 0; i < hours.length; i++) {
-            this.custPerHour[i] = getRandomIntInclusive(this.minCust, this.maxCust);
+            this.customersPerHour[i] = randomCustomers(this.minCustomersPerHour, this.maxCustomersPerHour);
         }
-
-        return[this.custPerHour.push];
+        return[this.customersPerHour.push];
     },
 
     // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
-    multiply: function() {
+    calcSalesPerHour: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.salesPerHour[i] = this.custPerHour[i] * this.avgPerCust;
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.salesPerHour[i] = this.customersPerHour[i] * this.avgCookiesPerCustomer;
             this.salesPerHour[i] = Math.ceil(this.salesPerHour[i]);
         }
-
         return[this.salesPerHour.push];
     },
 
-    total: function() {
+        // Adds each hour's cookie sales to find the total amount of cookies sold per day.
+        calcTotalDailyCookies: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.totalDailyCookies = this.totalDailyCookies + this.salesPerHour[i];
         }
-        return[this.totalCookies];
+        return[this.totalDailyCookies];
     },
 
     render: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
             var liEl = document.createElement('li');
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             seaTacUl.appendChild(liEl);
         }
         var liEl = document.createElement('li');
-        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        liEl.textContent = `Total: ${this.totalDailyCookies} cookies`;
         seaTacUl.appendChild(liEl);
     }
-
 };
 
 var seaCenter = {
     name: 'Seattle Center',
-    minCust: 11,
-    maxCust: 38,
-    avgPerCust: 3.7,
-    custPerHour: [],
+    minCustomersPerHour: 11,
+    maxCustomersPerHour: 38,
+    avgCookiesPerCustomer: 3.7,
+    customersPerHour: [],
     salesPerHour: [],
-    totalCookies: 0,
+    totalDailyCookies: 0,
 
     // Generates an estimated average number of customers per hour
-    footTraffic: function () {
+    calcCustomersPerHour: function () {
         var i;
 
         for (i = 0; i < hours.length; i++) {
-            this.custPerHour[i] = getRandomIntInclusive(this.minCust, this.maxCust);
+            this.customersPerHour[i] = randomCustomers(this.minCustomersPerHour, this.maxCustomersPerHour);
         }
-
-        return[this.custPerHour.push];
+        return[this.customersPerHour.push];
     },
 
     // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
-    multiply: function() {
+    calcSalesPerHour: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.salesPerHour[i] = this.custPerHour[i] * this.avgPerCust;
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.salesPerHour[i] = this.customersPerHour[i] * this.avgCookiesPerCustomer;
             this.salesPerHour[i] = Math.ceil(this.salesPerHour[i]);
         }
-
         return[this.salesPerHour.push];
     },
 
-    total: function() {
+        // Adds each hour's cookie sales to find the total amount of cookies sold per day.
+        calcTotalDailyCookies: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.totalDailyCookies = this.totalDailyCookies + this.salesPerHour[i];
         }
-        return[this.totalCookies];
+        return[this.totalDailyCookies];
     },
 
     render: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
             var liEl = document.createElement('li');
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             seaCenterUl.appendChild(liEl);
         }
         var liEl = document.createElement('li');
-        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        liEl.textContent = `Total: ${this.totalDailyCookies} cookies`;
         seaCenterUl.appendChild(liEl);
     }
-
 };
 
 var capHill = {
     name: 'Capitol Hill',
-    minCust: 20,
-    maxCust: 38,
-    avgPerCust: 2.8,
-    custPerHour: [],
+    minCustomersPerHour: 20,
+    maxCustomersPerHour: 38,
+    avgCookiesPerCustomer: 2.8,
+    customersPerHour: [],
     salesPerHour: [],
-    totalCookies: 0,
-    
+    totalDailyCookies: 0,
+
     // Generates an estimated average number of customers per hour
-    footTraffic: function () {
+    calcCustomersPerHour: function () {
         var i;
 
         for (i = 0; i < hours.length; i++) {
-            this.custPerHour[i] = getRandomIntInclusive(this.minCust, this.maxCust);
+            this.customersPerHour[i] = randomCustomers(this.minCustomersPerHour, this.maxCustomersPerHour);
         }
-
-        return[this.custPerHour.push];
+        return[this.customersPerHour.push];
     },
 
     // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
-    multiply: function() {
+    calcSalesPerHour: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.salesPerHour[i] = this.custPerHour[i] * this.avgPerCust;
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.salesPerHour[i] = this.customersPerHour[i] * this.avgCookiesPerCustomer;
             this.salesPerHour[i] = Math.ceil(this.salesPerHour[i]);
         }
-
         return[this.salesPerHour.push];
     },
 
-    total: function() {
+        // Adds each hour's cookie sales to find the total amount of cookies sold per day.
+        calcTotalDailyCookies: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.totalDailyCookies = this.totalDailyCookies + this.salesPerHour[i];
         }
-        return[this.totalCookies];
+        return[this.totalDailyCookies];
     },
 
 render: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
             var liEl = document.createElement('li');
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             capHillUl.appendChild(liEl);
         }
         var liEl = document.createElement('li');
-        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        liEl.textContent = `Total: ${this.totalDailyCookies} cookies`;
         capHillUl.appendChild(liEl);
     }
-
 };
 
 var alki = {
     name: 'Alki Beach',
-    minCust: 2,
-    maxCust: 16,
-    avgPerCust: 4.6,
-    custPerHour: [],
+    minCustomersPerHour: 2,
+    maxCustomersPerHour: 16,
+    avgCookiesPerCustomer: 4.6,
+    customersPerHour: [],
     salesPerHour: [],
-    totalCookies: 0,
+    totalDailyCookies: 0,
 
     // Generates an estimated average number of customers per hour
-    footTraffic: function () {
+    calcCustomersPerHour: function () {
         var i;
 
         for (i = 0; i < hours.length; i++) {
-            this.custPerHour[i] = getRandomIntInclusive(this.minCust, this.maxCust);
+            this.customersPerHour[i] = randomCustomers(this.minCustomersPerHour, this.maxCustomersPerHour);
         }
-
-        return[this.custPerHour.push];
+        return[this.customersPerHour.push];
     },
 
     // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
-    multiply: function() {
+    calcSalesPerHour: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.salesPerHour[i] = this.custPerHour[i] * this.avgPerCust;
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.salesPerHour[i] = this.customersPerHour[i] * this.avgCookiesPerCustomer;
             this.salesPerHour[i] = Math.ceil(this.salesPerHour[i]);
         }
-
         return[this.salesPerHour.push];
     },
 
-    total: function() {
+        // Adds each hour's cookie sales to find the total amount of cookies sold per day.
+        calcTotalDailyCookies: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
-            this.totalCookies = this.totalCookies + this.salesPerHour[i];
+
+        for (i = 0; i < this.customersPerHour.length; i++) {
+            this.totalDailyCookies = this.totalDailyCookies + this.salesPerHour[i];
         }
-        return[this.totalCookies];
+        return[this.totalDailyCookies];
     },
 
     render: function() {
         var i;
-        for (i = 0; i < this.custPerHour.length; i++) {
+        for (i = 0; i < this.customersPerHour.length; i++) {
             var liEl = document.createElement('li');
             liEl.textContent = `${hours[i]}: ${this.salesPerHour[i]} cookies`;
             alkiUl.appendChild(liEl);
         }
         var liEl = document.createElement('li');
-        liEl.textContent = `Total: ${this.totalCookies} cookies`;
+        liEl.textContent = `Total: ${this.totalDailyCookies} cookies`;
         alkiUl.appendChild(liEl);
     }
 };
 
-firstAndPike.footTraffic();
-firstAndPike.multiply();
-firstAndPike.total();
+firstAndPike.calcCustomersPerHour();
+firstAndPike.calcSalesPerHour();
+firstAndPike.calcTotalDailyCookies();
 firstAndPike.render();
 
-seaTac.footTraffic();
-seaTac.multiply();
-seaTac.total();
+seaTac.calcCustomersPerHour();
+seaTac.calcSalesPerHour();
+seaTac.calcTotalDailyCookies();
 seaTac.render();
 
-seaCenter.footTraffic();
-seaCenter.multiply();
-seaCenter.total();
+seaCenter.calcCustomersPerHour();
+seaCenter.calcSalesPerHour();
+seaCenter.calcTotalDailyCookies();
 seaCenter.render();
 
-capHill.footTraffic();
-capHill.multiply();
-capHill.total();
+capHill.calcCustomersPerHour();
+capHill.calcSalesPerHour();
+capHill.calcTotalDailyCookies();
 capHill.render();
 
-alki.footTraffic();
-alki.multiply();
-alki.total();
+alki.calcCustomersPerHour();
+alki.calcSalesPerHour();
+alki.calcTotalDailyCookies();
 alki.render();
