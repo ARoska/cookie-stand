@@ -10,11 +10,6 @@ function getRandom(max, min) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function sum(a, b) {
-  var output = a + b;
-  return output;
-}
-
 function Store(name, minCustomersPerHour, maxCustomersPerHour, avgCookiesPerCustomer) {
   this.name = name;
   // this.hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
@@ -80,20 +75,17 @@ function calculateCookiesPerDay() {
 }
 
 // Finds the total amount of cookies sold per hour across all stores
-Store.prototype.allStoresSalesPerHour = function() {
-  var total;
-  for(var i = 0; i < allStores.length; i++) {
-    for(var j = 0; j < hours.length; j++) {
-      total = sum(this.salesPerHour[i], total);
+function generatDailySales() {
+  var finalTotal = 0;
+  for(var i = 0; i < hours.length; i++) {
+    var total = 0;
+    for(var j = 0; j < allStores.length; j++) {
+      total += allStores[j].salesPerHour[i];
     }
     allStoresTotals.push(total);
+    finalTotal += total;
   }
-};
-
-function calculateAllStoresSalesPerHour() {
-  for(var i = 0; i < allStores.length; i++) {
-    allStores[i].allStoresSalesPerHour();
-  }
+  allStoresTotals.push(finalTotal);
 }
 
 Store.prototype.render = function() {
@@ -130,20 +122,31 @@ function makeHeaderRow() {
     trEl.appendChild(thEl);
   }
   thEl = document.createElement('th');
-  thEl.textContent = 'Total';
+  thEl.textContent = 'Daily Totals';
   trEl.appendChild(thEl);
   cookieTable.appendChild(trEl);
 }
 
 function makeFooterRow() {
-
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  var tdEl = document.createElement('td');
+  thEl.textContent = 'Hourly Totals';
+  trEl.appendChild(thEl);
+  for (var i = 0; i < allStoresTotals.length[i]; i++) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = allStoresTotals[i];
+    console.log(allStoresTotals[i]);
+    trEl.appendChild(thEl);
+  }
+  cookieTable.appendChild(trEl);
 }
 
 calculateFootTraffic();
 calculateSalesPerHour();
 calculateCookiesPerDay();
-calculateAllStoresSalesPerHour();
+generatDailySales();
 
 makeHeaderRow();
 renderAllSales();
-console.table(allStores);
+makeFooterRow();
