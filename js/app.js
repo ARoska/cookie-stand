@@ -1,13 +1,10 @@
 'use strict';
 
-// var pikeUl = document.getElementById('pike');
-// var seaTacUl = document.getElementById('seatac');
-// var seaCenterUl = document.getElementById('seacenter');
-// var capHillUl =  document.getElementById('caphill');
-// var alkiUl = document.getElementById('alki');
+var cookieTable = document.getElementById('sales');
+
 var allStores = [];
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-var cookieTable = document.getElementById('sales');
+var allStoresTotals = [];
 
 function getRandom(max, min) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -40,6 +37,12 @@ Store.prototype.footTraffic = function() {
   }
 };
 
+function calculateFootTraffic() {
+  for(var i = 0; i < allStores.length; i++) {
+    allStores[i].footTraffic();
+  }
+}
+
 // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
 Store.prototype.getSalesPerHour = function() {
   for (var i = 0; i < this.totalCustomersPerHour.length; i++) {
@@ -50,6 +53,12 @@ Store.prototype.getSalesPerHour = function() {
   }
 };
 
+function calculateSalesPerHour() {
+  for(var i = 0; i < allStores.length; i++) {
+    allStores[i].getSalesPerHour();
+  }
+}
+
 // Finds the total amount of cookies sold per day
 Store.prototype.cookiesPerDay = function() {
   for (var i = 0; i < this.totalCustomersPerHour.length; i++) {
@@ -59,29 +68,37 @@ Store.prototype.cookiesPerDay = function() {
   }
 };
 
-function calculateFootTraffic() {
-  for(var i = 0; i < allStores.length; i++) {
-    allStores[i].footTraffic();
-  }
-}
-
-function calculateSalesPerHour() {
-  for(var i = 0; i < allStores.length; i++) {
-    allStores[i].getSalesPerHour();
-  }
-}
-
 function calculateCookiesPerDay() {
   for(var i = 0; i < allStores.length; i++) {
     allStores[i].cookiesPerDay();
   }
 }
 
+// Finds the total amount of cookies sold per hour across all stores
+Store.prototype.allStoresSalesPerHour = function() {
+  var total;
+  for(var i = 0; i < hours.length; i++) {
+    for(var j = 0; j < allStores.length; j++) {
+      total += allStores[j].salesPerHour;
+    }
+    allStoresTotals.push(total);
+  }
+};
+
+function calculateAllStoresSalesPerHour() {
+  for(var i = 0; i < allStores.length; i++) {
+    allStores[i].allStoresSalesPerHour;
+  }
+}
+
+calculateAllStoresSalesPerHour();
+
 Store.prototype.render = function() {
   var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
   var tdEl = document.createElement('td');
-  tdEl.textContent = this.name;
-  trEl.appendChild(tdEl);
+  thEl.textContent = this.name;
+  trEl.appendChild(thEl);
   for(var i = 0; i < hours.length; i++) {
     tdEl = document.createElement('td');
     tdEl.textContent = this.salesPerHour[i];
@@ -126,9 +143,3 @@ calculateCookiesPerDay();
 makeHeaderRow();
 renderAllSales();
 console.table(allStores);
-
-//
-// firstAndPike.footTraffic();
-// firstAndPike.multiply();
-// firstAndPike.total();
-// firstAndPike.render();
