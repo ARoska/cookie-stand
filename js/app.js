@@ -37,11 +37,19 @@ Store.prototype.footTraffic = function() {
   }
 };
 
-function calculateFootTraffic() {
+// function calculateFootTraffic() {
+//   for(var i = 0; i < allStores.length; i++) {
+//     allStores[i].footTraffic();
+//   }
+// }
+
+function calculate(figure) {
   for(var i = 0; i < allStores.length; i++) {
-    allStores[i].footTraffic();
+    allStores[i].figure();
   }
 }
+
+calculate('footTraffic');
 
 // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
 Store.prototype.getSalesPerHour = function() {
