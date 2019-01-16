@@ -10,6 +10,11 @@ function getRandom(max, min) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function sum(a, b) {
+  var output = a + b;
+  return output;
+}
+
 function Store(name, minCustomersPerHour, maxCustomersPerHour, avgCookiesPerCustomer) {
   this.name = name;
   // this.hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
@@ -77,9 +82,9 @@ function calculateCookiesPerDay() {
 // Finds the total amount of cookies sold per hour across all stores
 Store.prototype.allStoresSalesPerHour = function() {
   var total;
-  for(var i = 0; i < hours.length; i++) {
-    for(var j = 0; j < allStores.length; j++) {
-      total += allStores[j].salesPerHour;
+  for(var i = 0; i < allStores.length; i++) {
+    for(var j = 0; j < hours.length; j++) {
+      total = sum(this.salesPerHour[i], total);
     }
     allStoresTotals.push(total);
   }
@@ -87,11 +92,9 @@ Store.prototype.allStoresSalesPerHour = function() {
 
 function calculateAllStoresSalesPerHour() {
   for(var i = 0; i < allStores.length; i++) {
-    allStores[i].allStoresSalesPerHour;
+    allStores[i].allStoresSalesPerHour();
   }
 }
-
-calculateAllStoresSalesPerHour();
 
 Store.prototype.render = function() {
   var trEl = document.createElement('tr');
@@ -139,6 +142,7 @@ function makeFooterRow() {
 calculateFootTraffic();
 calculateSalesPerHour();
 calculateCookiesPerDay();
+calculateAllStoresSalesPerHour();
 
 makeHeaderRow();
 renderAllSales();
