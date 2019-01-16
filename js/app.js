@@ -131,13 +131,12 @@ function makeFooterRow() {
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   var tdEl = document.createElement('td');
-  thEl.textContent = 'Hourly Totals';
+  thEl.textContent = 'All Store Totals';
   trEl.appendChild(thEl);
-  for (var i = 0; i < allStoresTotals.length[i]; i++) {
+  for (var i = 0; i <= hours.length; i++) {
     tdEl = document.createElement('td');
     tdEl.textContent = allStoresTotals[i];
-    console.log(allStoresTotals[i]);
-    trEl.appendChild(thEl);
+    trEl.appendChild(tdEl);
   }
   cookieTable.appendChild(trEl);
 }
