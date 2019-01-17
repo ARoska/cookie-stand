@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Salmon Cookies!</title>
-    </head>
+  <head>
+    <title>Salmon Cookies Daily Sales</title>
+  </head>
 
-    <body>
-            <h1>Daily Sales Projections:</h1>
+  <body>
+    <h1>Daily Sales Projections:</h1>
 
-            <table id='sales'></table>
+    <form id="add-store">
+      <fieldset>
+        <legend>Add a new location</legend>
 
-            <script src="../js/app.js"></script>
-    </body>
+        <label for="newname">Store Name: </label>
+        <input name="newname" type="text" size="15" />
+
+        <label for="newmincust">Minimum # of customers: </label>
+        <input name="newmincust" type="text" size="15" />
+
+        <label for="newmaxcust">Maximum # of customers: </label>
+        <input name="newmaxcust" type="text" size="15" />
+
+        <label for="newavgcookies">Average # of cookies sold per hour: </label>
+        <input name="newavgcookies" type="text" size="15" />
+
+        <button type="submit">Add Store!</button>
+      </fieldset>
+    </form>
+
+    <table id="sales"></table>
+
+    <script src="../js/app.js"></script>
+  </body>
 </html>
