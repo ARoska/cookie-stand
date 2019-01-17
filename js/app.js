@@ -31,7 +31,6 @@ new Store('Alki', 2, 16, 4.6);
 
 // Generates an estimated average number of customers per hour
 Store.prototype.footTraffic = function() {
-  this.totalCustomersPerHour = [];
   for (var i = 0; i < hours.length; i++) {
     var traffic;
     traffic = getRandom(this.minCustomersPerHour, this.maxCustomersPerHour);
@@ -43,6 +42,11 @@ function calculateFootTraffic() {
   for(var i = 0; i < allStores.length; i++) {
     allStores[i].footTraffic();
   }
+}
+
+function calculateFootTrafficNewStore() {
+  var i = (allStores.length - 1);
+  allStores[i].footTraffic();
 }
 
 // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
@@ -172,7 +176,7 @@ function handleAddStore(event) {
 
   new Store(newStore, newMinCustomers, newMaxCustomers, newAverageCookies);
 
-  calculateFootTraffic();
+  calculateFootTrafficNewStore();
   calculateSalesPerHour();
   calculateCookiesPerDay();
   generateDailySales();
