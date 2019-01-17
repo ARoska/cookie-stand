@@ -1,6 +1,7 @@
 'use strict';
 
 var cookieTable = document.getElementById('sales');
+var addStore = document.getElementById('add-store');
 
 var allStores = [];
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
@@ -30,6 +31,7 @@ new Store('Alki', 2, 16, 4.6);
 
 // Generates an estimated average number of customers per hour
 Store.prototype.footTraffic = function() {
+  this.totalCustomersPerHour = [];
   for (var i = 0; i < hours.length; i++) {
     var traffic;
     traffic = getRandom(this.minCustomersPerHour, this.maxCustomersPerHour);
@@ -37,22 +39,15 @@ Store.prototype.footTraffic = function() {
   }
 };
 
-// function calculateFootTraffic() {
-//   for(var i = 0; i < allStores.length; i++) {
-//     allStores[i].footTraffic();
-//   }
-// }
-
-function calculate(figure) {
+function calculateFootTraffic() {
   for(var i = 0; i < allStores.length; i++) {
-    allStores[i].figure();
+    allStores[i].footTraffic();
   }
 }
 
-calculate('footTraffic');
-
 // Multiplies average amount of cookies per customer by average amount of customers per hour, rounds up to nearest integer.
 Store.prototype.getSalesPerHour = function() {
+  this.salesPerHour = [];
   for (var i = 0; i < this.totalCustomersPerHour.length; i++) {
     var sales;
     sales = this.totalCustomersPerHour[i] * this.avgCookiesPerCustomer;
@@ -69,6 +64,7 @@ function calculateSalesPerHour() {
 
 // Finds the total amount of cookies sold per day
 Store.prototype.cookiesPerDay = function() {
+  this.totalCookiesPerDay = 0;
   for (var i = 0; i < this.totalCustomersPerHour.length; i++) {
     var total;
     total = this.totalCookiesPerDay + this.salesPerHour[i];
@@ -83,8 +79,9 @@ function calculateCookiesPerDay() {
 }
 
 // Finds the total amount of cookies sold per hour across all stores
-function generatDailySales() {
+function generateDailySales() {
   var finalTotal = 0;
+  allStoresTotals = [];
   for(var i = 0; i < hours.length; i++) {
     var total = 0;
     for(var j = 0; j < allStores.length; j++) {
@@ -149,10 +146,54 @@ function makeFooterRow() {
   cookieTable.appendChild(trEl);
 }
 
+function handleAddStore(event) {
+  // console.log('log of the event object', event);
+  // console.log('log of the event.target', event.target);
+  // console.log('log of the event.target.who', event.target.who);
+  console.log('log of event.target.newname.value', event.target.newname.value);
+  console.log('log of event.target.newmincust.value', event.target.newmincust.value);
+  console.log('log of event.target.newmaxcust.value', event.target.newmaxcust.value);
+  console.log('log of event.target.newavgcookies.value', event.target.newavgcookies.value);
+
+  event.preventDefault();
+
+  var newStore = event.target.newname.value;
+  var newMinCustomers = parseInt(event.target.newmincust.value);
+  var newMaxCustomers = parseFloat(event.target.newmaxcust.value);
+  var newAverageCookies = parseFloat(event.target.newavgcookies.value);
+
+  if(!event.target.newname.value || !event.target.newmincust.value || !event.target.newmaxcust.value || !event.target.newavgcookies.value) {
+    return alert('All values must be filled in');
+  }
+
+  if(isNaN(newMinCustomers) || isNaN(newMaxCustomers) || isNaN(newAverageCookies)) {
+    return alert('Min Customers, Max Customers and Average Amount of Cookies must all be numbers.');
+  }
+
+  new Store(newStore, newMinCustomers, newMaxCustomers, newAverageCookies);
+
+  calculateFootTraffic();
+  calculateSalesPerHour();
+  calculateCookiesPerDay();
+  generateDailySales();
+
+  cookieTable.innerHTML = '';
+  makeHeaderRow();
+  renderAllSales();
+  makeFooterRow();
+
+  event.target.newname.value = null;
+  event.target.newmincust.value = null;
+  event.target.newmaxcust.value = null;
+  event.target.newavgcookies.value = null;
+}
+
+addStore.addEventListener('submit', handleAddStore);
+
 calculateFootTraffic();
 calculateSalesPerHour();
 calculateCookiesPerDay();
-generatDailySales();
+generateDailySales();
 
 makeHeaderRow();
 renderAllSales();
