@@ -13,7 +13,6 @@ function getRandom(max, min) {
 
 function Store(name, minCustomersPerHour, maxCustomersPerHour, avgCookiesPerCustomer) {
   this.name = name;
-  // this.hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
   this.minCustomersPerHour = minCustomersPerHour;
   this.maxCustomersPerHour = maxCustomersPerHour;
   this.avgCookiesPerCustomer = avgCookiesPerCustomer;
@@ -151,13 +150,10 @@ function makeFooterRow() {
 }
 
 function handleAddStore(event) {
-  // console.log('log of the event object', event);
-  // console.log('log of the event.target', event.target);
-  // console.log('log of the event.target.who', event.target.who);
-  console.log('log of event.target.newname.value', event.target.newname.value);
-  console.log('log of event.target.newmincust.value', event.target.newmincust.value);
-  console.log('log of event.target.newmaxcust.value', event.target.newmaxcust.value);
-  console.log('log of event.target.newavgcookies.value', event.target.newavgcookies.value);
+  // console.log('log of event.target.newname.value', event.target.newname.value);
+  // console.log('log of event.target.newmincust.value', event.target.newmincust.value);
+  // console.log('log of event.target.newmaxcust.value', event.target.newmaxcust.value);
+  // console.log('log of event.target.newavgcookies.value', event.target.newavgcookies.value);
 
   event.preventDefault();
 
@@ -171,7 +167,15 @@ function handleAddStore(event) {
   }
 
   if(isNaN(newMinCustomers) || isNaN(newMaxCustomers) || isNaN(newAverageCookies)) {
-    return alert('Min Customers, Max Customers and Average Amount of Cookies must all be numbers.');
+    return alert('Customer Counts and Average Amount of Cookies must all be positive numbers.');
+  }
+
+  if(newMinCustomers < 1 || newMaxCustomers < 1 || newAverageCookies < 1) {
+    return alert('Customer Counts and Average Amount of Cookies must all be positive numbers.');
+  }
+
+  if(newMaxCustomers < newMinCustomers) {
+    return alert('Max Customers must be equal to or higher than Min Customers');
   }
 
   new Store(newStore, newMinCustomers, newMaxCustomers, newAverageCookies);
