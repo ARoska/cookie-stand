@@ -79,25 +79,30 @@ legend {
 
 table {
   margin: 10px 0 100px 0;
+  border-spacing: 2px;
 
 }
 
 th {
-  border-radius: 15px 50px;
+  border-radius: 20px 50px;
   background-color: #12363E;
-  margin: 2px;
   padding: 5px;
   font-weight: bold;
-  
+
 }
 
 tr {
-  border: 2px dotted white;
+  /* border: 2px dotted white; */
 
 }
 
 td {
   border: 2px dotted white;
   text-align: center;
+
+}
+
+.footer-links {
+  color: #286D62;
 
 }
