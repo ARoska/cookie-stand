@@ -1,0 +1,55 @@
+header {
+  background-color: #12363E;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+
+}
+
+body {
+  background-color: #A3B18E;
+  margin: 0;
+  padding: 0;
+
+}
+
+footer {
+  background-color: #12363E;
+  margin: 0;
+  padding: 0;
+
+}
+
+h1 {
+  margin: auto;
+  width: 50%;
+  font-size: 24pt;
+  border: 2px solid black;
+  
+}
+
+#logo {
+  float: left;
+  clear: left;
+  padding: 10px;
+  width: 175px;
+  height: auto;
+  
+}
+
+.nav-panel {
+  float: left;
+  margin: 100px 10px 10px 10px;
+
+}
+
+#social-media-container {
+  float: right;
+  border: 2px solid #286D62;
+}
+
+.social-media {
+  float: right;
+  margin: 5px;
+
+}
