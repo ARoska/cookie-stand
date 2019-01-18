@@ -21,25 +21,36 @@ footer {
 }
 
 h1 {
-  margin: auto;
+  margin: 10px 80px;
   width: 50%;
-  font-size: 24pt;
-  border: 2px solid black;
-  
+  font-size: 36pt;
+  /* border: 2px solid black; */
+  text-align: center;
+  float: left;
 }
 
 #logo {
   float: left;
   clear: left;
   padding: 10px;
+  margin: 30px 15px;
   width: 175px;
   height: auto;
   
 }
 
+#nav-panel-container {
+  float: left;
+  /* clear: left;
+   */
+}
+
 .nav-panel {
   float: left;
-  margin: 100px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+  border: 2px solid black;
+  background-color: #D9CB97;
+  padding: 20px 30px;
 
 }
 
@@ -51,5 +62,42 @@ h1 {
 .social-media {
   float: right;
   margin: 5px;
+
+}
+
+#add-store {
+  border: 2px solid #12363E;
+  margin: 25px 0 15px 0;
+
+}
+
+legend {
+  font: 18pt bold;
+  /* float: left; */
+
+}
+
+table {
+  margin: 10px 0 100px 0;
+
+}
+
+th {
+  border-radius: 15px 50px;
+  background-color: #12363E;
+  margin: 2px;
+  padding: 5px;
+  font-weight: bold;
+  
+}
+
+tr {
+  border: 2px dotted white;
+
+}
+
+td {
+  border: 2px dotted white;
+  text-align: center;
 
 }
