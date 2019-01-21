@@ -1,57 +1,17 @@
+/* ---------------------- */
+/* HEADER */
+/* ---------------------- */
+
 header {
   background-color: #12363E;
-  margin: 0;
-  padding: 0;
-  height: 200px;
+  height: 90px;
 
-}
-
-body {
-  background-color: #A3B18E;
-  margin: 0;
-  padding: 0;
-
-}
-
-footer {
-  background-color: #12363E;
-  margin: 0;
-  padding: 0;
-
-}
-
-h1 {
-  margin: 10px 80px;
-  width: 50%;
-  font-size: 36pt;
-  /* border: 2px solid black; */
-  text-align: center;
-  float: left;
 }
 
 #logo {
   float: left;
-  clear: left;
-  padding: 10px;
-  margin: 30px 15px;
-  width: 175px;
-  height: auto;
+  margin: 10px 15px;
   
-}
-
-#nav-panel-container {
-  float: left;
-  /* clear: left;
-   */
-}
-
-.nav-panel {
-  float: left;
-  margin: 10px 10px 10px 10px;
-  border: 2px solid black;
-  background-color: #D9CB97;
-  padding: 20px 30px;
-
 }
 
 #social-media-container {
@@ -64,6 +24,115 @@ h1 {
   margin: 5px;
 
 }
+
+#nav-panel-container {
+  float: left;
+
+}
+
+.nav-panel {
+  float: left;
+  margin-top: 25px;
+  margin-right: 10px;
+  border: 2px solid black;
+  background-color: #D9CB97;
+  padding: 10px 15px;
+
+}
+
+/* ---------------------- */
+/* BODY */
+/* ---------------------- */
+
+body {
+  background-color: #A3B18E;
+
+}
+
+body h1 {
+  margin: 10px auto;
+  width: 50%;
+  font-size: 36pt;
+  border: 2px solid black;
+  text-align: center;
+}
+
+#salmon-header {
+  display: block;
+  margin: 0px auto;
+  
+}
+
+#feature-one {
+  background-color: #D63524;
+  margin: 30px 0px 60px 150px;
+  height: 250px;
+}
+
+section h2 {
+  font-size: 24pt;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+#cutter {
+  float: left;
+  height: 200px;
+  width: auto;
+
+}
+
+#cookie {
+  float: right;
+  height: 200px;
+  width: auto;
+
+}
+
+#feature-two {
+  background-color: #D63524;
+  margin: 60px 150px 60px 0px;
+  height: 250px;
+}
+
+#family {
+  float: left;
+  height: 200px;
+  width: auto;
+
+}
+
+#chinook {
+  float: right;
+  height: 150px;
+  width: auto;
+
+}
+
+#feature-three {
+  background-color: #D63524;
+  margin: 60px 0px 30px 150px;
+  height: 250px;
+}
+
+#shirt {
+  float: left;
+  height: 200px;
+  width: auto;
+
+}
+
+#fish {
+  float: right;
+  height: 200px;
+  width: auto;
+
+}
+
+/* ---------------------- */
+/* SALES TABLE */
+/* ---------------------- */
 
 #add-store {
   border: 2px solid #12363E;
@@ -79,25 +148,34 @@ legend {
 
 table {
   margin: 10px 0 100px 0;
+  border-spacing: 2px;
 
 }
 
 th {
-  border-radius: 15px 50px;
+  border-radius: 20px 50px;
   background-color: #12363E;
-  margin: 2px;
   padding: 5px;
   font-weight: bold;
-  
-}
-
-tr {
-  border: 2px dotted white;
 
 }
 
 td {
   border: 2px dotted white;
   text-align: center;
+
+}
+
+/* ---------------------- */
+/* FOOTER */
+/* ---------------------- */
+
+footer {
+  background-color: #12363E;
+
+}
+
+.footer-links {
+  color: #286D62;
 
 }
